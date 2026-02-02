@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">VoiceDictation</string>
+    <string name="app_name">Голосовая диктовка</string>
+    <string name="start_recording">НАЧАТЬ ЗАПИСЬ</string>
+    <string name="stop_recording">ОСТАНОВИТЬ</string>
+    <string name="speak_now">ГОВОРИТЕ СЕЙЧАС…</string>
+    <string name="recognition_complete">Распознавание завершено!</string>
+    <string name="recognition_failed">Не удалось распознать речь</string>
+    <string name="copy_text">КОПИРОВАТЬ</string>
+    <string name="clear_text">ОЧИСТИТЬ</string>
+    <string name="share_text">ПОДЕЛИТЬСЯ</string>
+    <string name="text_copied">Текст скопирован в буфер</string>
+    <string name="text_cleared">Текст очищен</string>
+    <string name="mic_permission_required">Требуется доступ к микрофону</string>
+    <string name="grant_permission">ПРЕДОСТАВИТЬ</string>
+    <string name="no_speech_detected">Речь не обнаружена</string>
+    <string name="speech_not_supported">Распознавание речи не поддерживается</string>
+    <string name="placeholder_text">Здесь появится распознанный текст…\n\n• Нажмите кнопку ниже\n• Говорите четко\n• Результат появится автоматически</string>
+    <string name="result_title">РАСПОЗНАННЫЙ ТЕКСТ:</string>
 </resources>
