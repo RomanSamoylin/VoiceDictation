@@ -1,44 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Базовая тема приложения -->
     <style name="Theme.VoiceDictation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/accent</item>
-        <item name="colorSecondaryVariant">@color/accent</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:textColor">@color/text_primary</item>
-    </style>
-
-    <!-- Стиль для кнопки записи -->
-    <style name="RecordButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/primary</item>
-        <item name="cornerRadius">56dp</item>
-        <item name="android:minWidth">112dp</item>
-        <item name="android:minHeight">112dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:letterSpacing">0.1</item>
-        <item name="android:elevation">8dp</item>
-        <item name="android:translationZ">8dp</item>
-    </style>
-
-    <!-- Стиль для карточек -->
-    <style name="CardStyle" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardBackgroundColor">@color/surface</item>
-    </style>
-
-    <!-- Стиль для поля результата -->
-    <style name="ResultTextStyle">
-        <item name="android:textSize">18sp</item>
-        <item name="android:lineSpacingExtra">4dp</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryVariant">#1976D2</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:statusBarColor">#1976D2</item>
     </style>
 </resources>

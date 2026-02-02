@@ -1,0 +1,26 @@
+buildscript {
+    // Конфигурация buildscript остается здесь
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0' // или ваша версия
+        // другие зависимости classpath
+    }
+}
+plugins {
+    alias(libs.plugins.kotlin.android) apply false
+}
+
+// УДАЛИТЕ этот блок репозиториев из корневого уровня:
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
