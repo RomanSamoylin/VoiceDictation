@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme -->
+    <!-- Base application theme for light mode -->
     <style name="Theme.VoiceDictation" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/primary</item>
@@ -26,10 +26,12 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
 
         <!-- Text colors -->
         <item name="android:textColorPrimary">@color/on_surface</item>
         <item name="android:textColorSecondary">@color/on_surface_variant</item>
+        <item name="android:textColorHint">@color/on_surface_variant</item>
 
         <!-- Error color -->
         <item name="colorError">@color/error</item>
@@ -37,8 +39,152 @@
 
         <!-- Button style -->
         <item name="materialButtonStyle">@style/Widget.AppCompat.Button</item>
+        <item name="buttonStyle">@style/Widget.AppCompat.Button</item>
 
         <!-- EditText style -->
         <item name="editTextStyle">@style/Widget.AppCompat.EditText</item>
+        <item name="android:editTextBackground">@drawable/text_field_background_light</item>
+        <item name="android:editTextColor">@color/on_surface</item>
+
+        <!-- CheckBox style -->
+        <item name="checkboxStyle">@style/Widget.AppCompat.CompoundButton.CheckBox</item>
+
+        <!-- Switch style -->
+        <item name="switchStyle">@style/Widget.AppCompat.CompoundButton.Switch</item>
+
+        <!-- RadioButton style -->
+        <item name="radioButtonStyle">@style/Widget.AppCompat.CompoundButton.RadioButton</item>
+
+        <!-- ProgressBar style -->
+        <item name="android:progressBarStyle">@style/Widget.AppCompat.ProgressBar</item>
+
+        <!-- Spinner style -->
+        <item name="spinnerStyle">@style/Widget.AppCompat.Spinner</item>
+
+        <!-- Toolbar style -->
+        <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar</item>
+
+        <!-- ActionBar style -->
+        <item name="actionBarStyle">@style/Widget.AppCompat.ActionBar</item>
+
+        <!-- CardView style -->
+        <item name="cardViewStyle">@style/Widget.MaterialComponents.CardView</item>
+
+        <!-- FloatingActionButton style -->
+        <item name="floatingActionButtonStyle">@style/Widget.MaterialComponents.FloatingActionButton</item>
+
+        <!-- BottomNavigationView style -->
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView</item>
+
+        <!-- Chip style -->
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+
+        <!-- Shape appearance -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MaterialComponents.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MaterialComponents.LargeComponent</item>
+
+        <!-- Custom theme attributes -->
+        <item name="voiceDictationEditTextStyle">@style/EditTextTheme.Light</item>
+        <item name="voiceDictationButtonStyle">@style/ButtonTheme.Light</item>
+        <item name="voiceDictationCardStyle">@style/CardTheme.Light</item>
+
+        <!-- Animation -->
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- Window features -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- Dialog theme -->
+        <item name="alertDialogTheme">@style/ThemeOverlay.AppCompat.Dialog.Alert</item>
+        <item name="dialogTheme">@style/ThemeOverlay.AppCompat.Dialog</item>
+
+        <!-- Popup menu -->
+        <item name="popupMenuStyle">@style/Widget.AppCompat.PopupMenu</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <!-- Divider -->
+        <item name="android:divider">@color/grey_300</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <!-- Light theme for EditText -->
+    <style name="EditTextTheme.Light" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textColorHint">@color/on_surface_variant</item>
+        <item name="android:background">@drawable/text_field_background_light</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Light theme for Buttons -->
+    <style name="ButtonTheme.Light" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="cornerRadius">24dp</item>
+    </style>
+
+    <!-- Light theme for Cards -->
+    <style name="CardTheme.Light" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="strokeColor">@color/grey_300</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Light theme for ProgressBar -->
+    <style name="ProgressBarTheme.Light" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/primary</item>
+        <item name="android:progressTint">@color/primary</item>
+        <item name="android:secondaryProgressTint">@color/grey_300</item>
+    </style>
+
+    <!-- Light theme for Switch -->
+    <style name="SwitchTheme.Light" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumbTint">@color/primary</item>
+        <item name="android:trackTint">@color/grey_300</item>
+    </style>
+
+    <!-- Light theme for CheckBox -->
+    <style name="CheckBoxTheme.Light" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/primary</item>
+    </style>
+
+    <!-- Light theme for RadioButton -->
+    <style name="RadioButtonTheme.Light" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/primary</item>
+    </style>
+
+    <!-- Light theme for Toolbar -->
+    <style name="ToolbarTheme.Light" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/primary</item>
+        <item name="titleTextColor">@color/on_primary</item>
+        <item name="subtitleTextColor">@color/on_primary</item>
+    </style>
+
+    <!-- Light theme for Dialog -->
+    <style name="DialogTheme.Light" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textColorPrimary">@color/on_surface</item>
+        <item name="android:textColorSecondary">@color/on_surface_variant</item>
+    </style>
+
+    <!-- Animation for dialog -->
+    <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/abc_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/abc_fade_out</item>
     </style>
 </resources>

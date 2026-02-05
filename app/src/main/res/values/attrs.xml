@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom theme attributes -->
+    <attr name="voiceDictationEditTextStyle" format="reference" />
+    <attr name="voiceDictationButtonStyle" format="reference" />
+    <attr name="voiceDictationCardStyle" format="reference" />
+    <attr name="voiceDictationProgressBarStyle" format="reference" />
+    <attr name="voiceDictationSwitchStyle" format="reference" />
+    <attr name="voiceDictationCheckBoxStyle" format="reference" />
+    <attr name="voiceDictationRadioButtonStyle" format="reference" />
+    <attr name="voiceDictationToolbarStyle" format="reference" />
+    <attr name="voiceDictationDialogStyle" format="reference" />
+
+    <!-- Text appearance variants -->
+    <attr name="textAppearanceHeadline1" format="reference" />
+    <attr name="textAppearanceHeadline2" format="reference" />
+    <attr name="textAppearanceHeadline3" format="reference" />
+    <attr name="textAppearanceHeadline4" format="reference" />
+    <attr name="textAppearanceHeadline5" format="reference" />
+    <attr name="textAppearanceHeadline6" format="reference" />
+    <attr name="textAppearanceSubtitle1" format="reference" />
+    <attr name="textAppearanceSubtitle2" format="reference" />
+    <attr name="textAppearanceBody1" format="reference" />
+    <attr name="textAppearanceBody2" format="reference" />
+    <attr name="textAppearanceCaption" format="reference" />
+    <attr name="textAppearanceOverline" format="reference" />
+    <attr name="textAppearanceButton" format="reference" />
+</resources>

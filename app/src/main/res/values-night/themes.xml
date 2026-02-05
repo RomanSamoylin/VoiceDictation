@@ -28,8 +28,8 @@
         <item name="colorOnSurface">@color/on_surface</item>
 
         <!-- Text colors -->
-        <item name="android:textColorPrimary">@color/on_surface</item>
-        <item name="android:textColorSecondary">@color/on_surface_variant</item>
+        <item name="android:textColorPrimary">@color/on_surface</item>       <!-- БЕЛЫЙ -->
+        <item name="android:textColorSecondary">@color/on_surface_variant</item>  <!-- СЕРЫЙ -->
 
         <!-- Error color -->
         <item name="colorError">@color/error</item>
@@ -40,5 +40,14 @@
 
         <!-- EditText style -->
         <item name="editTextStyle">@style/Widget.AppCompat.EditText</item>
+
+        <!-- Кастомные атрибуты для темной темы -->
+        <!-- В темной теме все тексты БЕЛЫЕ -->
+        <item name="editTextColorDark">@color/white</item>            <!-- БЕЛЫЙ -->
+        <item name="checkTextTitleColorDark">@color/white</item>      <!-- БЕЛЫЙ -->
+        <item name="buttonIconColorDark">@color/white</item>          <!-- БЕЛЫЙ -->
+
+        <!-- Переопределение цвета текста в EditText -->
+        <item name="android:editTextColor">?attr/editTextColorDark</item>
     </style>
 </resources>

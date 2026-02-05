@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Атрибуты для темной темы -->
+    <attr name="editTextColorDark" format="color" />
+    <attr name="checkTextTitleColorDark" format="color" />
+    <attr name="buttonIconColorDark" format="color" />
+</resources>

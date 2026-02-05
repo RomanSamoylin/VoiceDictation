@@ -14,14 +14,15 @@
 
     <!-- Background and surface colors -->
     <color name="background">#121212</color>
-    <color name="on_background">#FFFFFF</color>
+    <color name="colorBackground">#121212</color>
+    <color name="on_background">#FFFFFF</color>  <!-- БЕЛЫЙ ТЕКСТ НА ТЕМНОМ ФОНЕ -->
     <color name="surface">#1E1E1E</color>
-    <color name="on_surface">#FFFFFF</color>
-    <color name="on_surface_variant">#B0B0B0</color>
+    <color name="on_surface">#FFFFFF</color>     <!-- БЕЛЫЙ ТЕКСТ -->
+    <color name="on_surface_variant">#B0B0B0</color>  <!-- Светло-серый для подсказок -->
 
     <!-- Error color -->
     <color name="error">#CF6679</color>
-    <color name="on_error">#000000</color>
+    <color name="on_error">#FFFFFF</color>
 
     <!-- Red colors -->
     <color name="red_300">#EF9A9A</color>
@@ -38,12 +39,13 @@
 
     <!-- Grey shades -->
     <color name="grey_200">#424242</color>
+    <color name="grey_300">#424242</color>
     <color name="grey_400">#616161</color>
-    <color name="grey_600">#9E9E9E</color>
+    <color name="grey_600">#FFFFFF</color>  <!-- БЕЛЫЙ для текста -->
     <color name="grey_800">#212121</color>
 
     <!-- White and black -->
-    <color name="white">#E0E0E0</color>
+    <color name="white">#FFFFFF</color>      <!-- ЧИСТЫЙ БЕЛЫЙ -->
     <color name="black">#000000</color>
 
     <!-- Success color -->
@@ -58,7 +60,6 @@
     <!-- Legacy colors (for compatibility) -->
     <color name="primary_color">#64B5F6</color>
     <color name="accent_color">#FF80AB</color>
-
     <!-- Transparent -->
     <color name="transparent">#00000000</color>
 </resources>

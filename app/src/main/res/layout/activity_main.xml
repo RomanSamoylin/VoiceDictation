@@ -1,245 +1,447 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?android:attr/colorBackground"
-    android:padding="16dp"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
-    <!-- Заголовок приложения -->
-
-    <!-- Основная область с текстом -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/text_field_background_light"
-        android:padding="8dp">
-
-        <!-- EditText для текста -->
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:hint="Текст появится здесь..."
-            android:gravity="top|start"
-            android:minHeight="200dp"
-            android:inputType="textMultiLine|textCapSentences"
-            android:maxLines="1000"
-            android:scrollbars="vertical"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textColorHint="@color/grey_600"/>
-
-        <!-- Индикатор анимации голоса -->
-        <ImageView
-            android:id="@+id/voiceAnimationView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_mic_24"
-            android:visibility="gone"
-            android:contentDescription="Анимация записи"
-            android:tint="@color/red_500"/>
-
-    </RelativeLayout>
-
-    <!-- Счетчик символов -->
-    <TextView
-        android:id="@+id/charCountText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Символов: 0 | Слов: 0"
-        android:textSize="12sp"
-        android:gravity="end"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="?android:attr/textColorSecondary"/>
-
-    <!-- Панель кнопок действий -->
+    <!-- Основной контейнер (нормальный режим) -->
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="24dp">
-
-        <!-- Кнопка микрофона -->
-        <ImageButton
-            android:id="@+id/micButton"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_mic_white"
-            android:background="@drawable/round_button_primary"
-            android:contentDescription="Запись голоса"
-            android:scaleType="center"
-            android:elevation="4dp"
-            app:tint="@color/white"/>
-
-        <!-- Кнопка очистки -->
-        <ImageButton
-            android:id="@+id/clearButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_clear"
-            android:background="@drawable/round_button_secondary"
-            android:contentDescription="Очистить текст"
-            android:visibility="gone"
-            android:scaleType="center"
-            android:elevation="2dp"
-            app:tint="?android:attr/textColorPrimary"/>
-
-        <!-- Кнопка копирования -->
-        <ImageButton
-            android:id="@+id/copyButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_content_copy"
-            android:background="@drawable/round_button_secondary"
-            android:contentDescription="Копировать текст"
-            android:visibility="gone"
-            android:scaleType="center"
-            android:elevation="2dp"
-            app:tint="?android:attr/textColorPrimary"/>
-
-        <!-- Кнопка поделиться -->
-        <ImageButton
-            android:id="@+id/shareButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_share"
-            android:background="@drawable/round_button_secondary"
-            android:contentDescription="Поделиться текстом"
-            android:visibility="gone"
-            android:scaleType="center"
-            android:elevation="2dp"
-            app:tint="?android:attr/textColorPrimary"/>
-
-    </LinearLayout>
-
-    <!-- Панель проверки текста -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Проверка текста:"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"
-        android:textColor="?android:attr/textColorPrimary"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp"
-        android:gravity="center">
-
-        <!-- Кнопка базовой проверки -->
-        <Button
-            android:id="@+id/btn_check_basic"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:text="Базовая проверка"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@color/white"
-            android:enabled="false"
-            style="@style/Widget.AppCompat.Button"
-            android:elevation="2dp"
-            android:stateListAnimator="@null"/>
-
-        <!-- Кнопка премиум проверки -->
-        <Button
-            android:id="@+id/btn_check_premium"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:text="Премиум проверка"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@color/white"
-            android:enabled="false"
-            style="@style/Widget.AppCompat.Button"
-            android:elevation="2dp"
-            android:stateListAnimator="@null"/>
-
-    </LinearLayout>
-
-    <!-- Прогресс-бары для проверок -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp">
-
-        <!-- Прогресс-бар для базовой проверки -->
-        <ProgressBar
-            android:id="@+id/progressBarBasic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:indeterminate="true"
-            android:visibility="gone"
-            android:indeterminateTint="@color/purple_500"/>
-
-        <!-- Прогресс-бар для премиум проверки -->
-        <ProgressBar
-            android:id="@+id/progressBarPremium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:indeterminate="true"
-            android:visibility="gone"
-            android:indeterminateTint="@color/teal_700"/>
-
-    </LinearLayout>
-
-    <!-- Информация о проверках -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        android:background="?selectableItemBackground"
-        android:padding="12dp"
-        android:elevation="1dp">
+        android:padding="16dp"
+        android:visibility="visible"
+        android:background="@color/colorBackground">
 
+        <!-- Заголовок приложения -->
+
+        <!-- Основная область с текстом -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/text_field_background_light"
+            android:padding="8dp">
+
+            <!-- EditText для текста -->
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="Текст появится здесь..."
+                android:gravity="top|start"
+                android:minHeight="200dp"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="1000"
+                android:scrollbars="vertical"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/on_surface"
+                android:textColorHint="@color/on_surface_variant"
+                android:focusableInTouchMode="true"
+                android:isScrollContainer="true"/>
+
+            <!-- Кнопка расширения (полноэкранный режим) -->
+            <ImageButton
+                android:id="@+id/btnExpand"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_expand"
+                android:background="@drawable/round_button_primary"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="12dp"
+                android:visibility="gone"
+                android:contentDescription="Развернуть на весь экран"
+                app:tint="@color/white"
+                android:elevation="4dp"/>
+
+            <!-- Индикатор анимации голоса -->
+            <ImageView
+                android:id="@+id/voiceAnimationView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_mic_24"
+                android:visibility="gone"
+                android:contentDescription="Анимация записи"
+                app:tint="@color/red_500"/>
+
+        </RelativeLayout>
+
+        <!-- Счетчик символов -->
         <TextView
+            android:id="@+id/charCountText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Информация о проверках:"
-            android:textStyle="bold"
+            android:text="Символов: 0 | Слов: 0"
             android:textSize="12sp"
-            android:layout_marginBottom="4dp"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/on_surface_variant"/>
 
+        <!-- Панель кнопок действий -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <!-- Кнопка микрофона -->
+            <ImageButton
+                android:id="@+id/micButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_mic_white"
+                android:background="@drawable/round_button_primary"
+                android:contentDescription="Запись голоса"
+                android:scaleType="center"
+                android:elevation="4dp"
+                app:tint="@color/white"/>
+
+            <!-- Кнопка очистки -->
+            <ImageButton
+                android:id="@+id/clearButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_clear"
+                android:background="@drawable/round_button_secondary"
+                android:contentDescription="Очистить текст"
+                android:visibility="gone"
+                android:scaleType="center"
+                android:elevation="2dp"
+                app:tint="@color/on_surface"/>
+
+            <!-- Кнопка копирования -->
+            <ImageButton
+                android:id="@+id/copyButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_content_copy"
+                android:background="@drawable/round_button_secondary"
+                android:contentDescription="Копировать текст"
+                android:visibility="gone"
+                android:scaleType="center"
+                android:elevation="2dp"
+                app:tint="@color/on_surface"/>
+
+            <!-- Кнопка поделиться -->
+            <ImageButton
+                android:id="@+id/shareButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_share"
+                android:background="@drawable/round_button_secondary"
+                android:contentDescription="Поделиться текстом"
+                android:visibility="gone"
+                android:scaleType="center"
+                android:elevation="2dp"
+                app:tint="@color/on_surface"/>
+
+        </LinearLayout>
+
+        <!-- Панель проверки текста -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Базовая: орфография и пунктуация"
-            android:textSize="11sp"
-            android:layout_marginBottom="2dp"
-            android:textColor="?android:attr/textColorSecondary"/>
+            android:text="Проверка текста:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/on_surface"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Премиум: + контекст и стиль"
-            android:textSize="11sp"
-            android:textColor="?android:attr/textColorSecondary"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+
+            <!-- Кнопка базовой проверки -->
+            <Button
+                android:id="@+id/btn_check_basic"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Базовая проверка"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@color/white"
+                android:enabled="false"
+                style="@style/Widget.AppCompat.Button"
+                android:elevation="2dp"
+                android:stateListAnimator="@null"/>
+
+            <!-- Кнопка премиум проверки -->
+            <Button
+                android:id="@+id/btn_check_premium"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Премиум проверка"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/teal_700"
+                android:textColor="@color/white"
+                android:enabled="false"
+                style="@style/Widget.AppCompat.Button"
+                android:elevation="2dp"
+                android:stateListAnimator="@null"/>
+
+        </LinearLayout>
+
+        <!-- Прогресс-бары для проверок -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Прогресс-бар для базовой проверки -->
+            <ProgressBar
+                android:id="@+id/progressBarBasic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:indeterminate="true"
+                android:visibility="gone"
+                android:indeterminateTint="@color/purple_500"/>
+
+            <!-- Прогресс-бар для премиум проверки -->
+            <ProgressBar
+                android:id="@+id/progressBarPremium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:indeterminate="true"
+                android:visibility="gone"
+                android:indeterminateTint="@color/teal_700"/>
+
+        </LinearLayout>
+
+        <!-- Информация о проверках -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:background="?attr/colorSurface"
+            android:padding="12dp"
+            android:elevation="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Информация о проверках:"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/on_surface"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Базовая: орфография и пунктуация"
+                android:textSize="11sp"
+                android:layout_marginBottom="2dp"
+                android:textColor="@color/on_surface_variant"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Премиум: + контекст и стиль"
+                android:textSize="11sp"
+                android:textColor="@color/on_surface_variant"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <!-- Полноэкранный редактор (изначально скрыт) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fullscreenEditor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:visibility="gone"
+        android:elevation="8dp">
+
+        <!-- Панель инструментов -->
+        <LinearLayout
+            android:id="@+id/editorToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="?attr/colorSurface"
+            android:elevation="4dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Кнопка назад/сохранить -->
+            <ImageButton
+                android:id="@+id/btnCloseEditor"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Вернуться назад"
+                app:tint="@color/on_surface"/>
+
+            <!-- Заголовок -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Редактирование текста"
+                android:textSize="18sp"
+                android:textColor="@color/on_surface"
+                android:gravity="center_vertical"/>
+
+            <!-- Дополнительные кнопки -->
+            <ImageButton
+                android:id="@+id/btnEditorPaste"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_paste"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Вставить текст"
+                app:tint="@color/on_surface"/>
+
+            <ImageButton
+                android:id="@+id/btnEditorClear"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_clear"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Очистить текст"
+                app:tint="@color/on_surface"/>
+
+        </LinearLayout>
+
+        <!-- Контейнер для текста с счетчиком -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/editorToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="4dp">
+
+            <!-- Счетчик символов в редакторе -->
+            <TextView
+                android:id="@+id/editorCharCountText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Символов: 0 | Слов: 0"
+                android:textSize="12sp"
+                android:gravity="end"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/on_surface_variant"
+                android:paddingHorizontal="12dp"/>
+
+            <!-- Поле ввода в полноэкранном режиме -->
+            <EditText
+                android:id="@+id/editTextFullscreen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/text_field_background_light"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="10000"
+                android:scrollbars="vertical"
+                android:padding="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/on_surface"
+                android:hint="Редактируйте текст здесь..."
+                android:textColorHint="@color/on_surface_variant"
+                android:isScrollContainer="true"/>
+
+            <!-- Панель быстрых действий в редакторе -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:paddingHorizontal="12dp">
+
+                <Button
+                    android:id="@+id/btnEditorSelectAll"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:text="Выделить все"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/grey_300"
+                    android:textColor="@color/on_surface"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/btnEditorCut"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Вырезать"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/grey_300"
+                    android:textColor="@color/on_surface"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/btnEditorCopy"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="Копировать"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/grey_300"
+                    android:textColor="@color/on_surface"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <Button
+                    android:id="@+id/btnEditorPasteText"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:text="Вставить"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/grey_300"
+                    android:textColor="@color/on_surface"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

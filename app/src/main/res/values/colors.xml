@@ -61,4 +61,8 @@
 
     <!-- Transparent -->
     <color name="transparent">#00000000</color>
+    <color name="colorBackground">#FAFAFA</color>
+
+    <color name="grey_300">#E0E0E0</color>
+
 </resources>

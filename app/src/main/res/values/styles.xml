@@ -1,58 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Стили для кнопок -->
-    <style name="WaveButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:minWidth">140dp</item>
-        <item name="android:minHeight">140dp</item>
-        <item name="cornerRadius">70dp</item>
-        <item name="elevation">12dp</item>
-        <item name="android:padding">0dp</item>
-        <item name="iconPadding">0dp</item>
+    <!-- App theme -->
+    <style name="AppTheme" parent="Theme.VoiceDictation">
+        <!-- Customize your theme here -->
     </style>
 
-    <style name="ActionButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:minWidth">120dp</item>
-        <item name="android:minHeight">120dp</item>
-        <item name="cornerRadius">60dp</item>
-        <item name="elevation">8dp</item>
-        <item name="strokeWidth">1dp</item>
-        <item name="strokeColor">@android:color/transparent</item>
-    </style>
-
-    <!-- Стили для текста -->
-    <style name="TextAppearanceTitle">
-        <item name="android:textSize">@dimen/text_size_xlarge</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_background</item>
-    </style>
-
-    <style name="TextAppearanceSubtitle">
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_background</item>
-    </style>
-
-    <style name="TextAppearanceBody">
-        <item name="android:textSize">@dimen/text_size_medium</item>
+    <!-- Text appearances -->
+    <style name="TextAppearance.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">96sp</item>
+        <item name="android:letterSpacing">-0.01562</item>
     </style>
 
-    <style name="TextAppearanceCaption">
-        <item name="android:textSize">@dimen/text_size_small</item>
+    <style name="TextAppearance.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:letterSpacing">-0.00833</item>
+    </style>
+
+    <style name="TextAppearance.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:letterSpacing">0.00735</item>
+    </style>
+
+    <style name="TextAppearance.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.0075</item>
+    </style>
+
+    <style name="TextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.00937</item>
+    </style>
+
+    <style name="TextAppearance.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.00625</item>
+    </style>
+
+    <style name="TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.03125</item>
+    </style>
+
+    <style name="TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.01786</item>
+    </style>
+
+    <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textColor">@color/on_surface_variant</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.03333</item>
     </style>
 
-    <!-- Стили для карточек - УПРОЩЕННАЯ ВЕРСИЯ -->
-    <style name="CardViewStyle">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">4dp</item>
+    <style name="TextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.08929</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
-    <!-- Стиль для результата - УПРОЩЕННАЯ ВЕРСИЯ -->
-    <style name="ResultCardStyle" parent="CardViewStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="cardBackgroundColor">@color/surface</item>
+    <!-- Shape appearances -->
+    <style name="ShapeAppearance.MaterialComponents.SmallComponent" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="ShapeAppearance.MaterialComponents.MediumComponent" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.MaterialComponents.LargeComponent" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 </resources>
