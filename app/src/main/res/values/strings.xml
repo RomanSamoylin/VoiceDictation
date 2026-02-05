@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Voice Dictation</string>
+    <string name="speak_now">Говорите...</string>
+    <string name="text_copied">Текст скопирован в буфер обмена</string>
+    <string name="text_cleared">Текст очищен</string>
+    <string name="no_speech_support">Распознавание речи не доступно на этом устройстве</string>
+    <string name="check_basic">Базовая проверка</string>
+    <string name="check_premium">Премиум проверка</string>
+    <string name="checking_basic">Проверяем базовой проверкой…</string>
+    <string name="checking_premium">Проверяем премиум-проверкой…</string>
+    <string name="basic_check_complete">Базовая проверка завершена</string>
+    <string name="premium_check_complete">Премиум-проверка завершена</string>
+    <string name="no_errors_found">Текст проверен, ошибок не найдено</string>
+    <string name="text_too_long">Текст слишком длинный для премиум-проверки (макс. 4000 символов)</string>
+    <string name="enter_text_to_check">Введите текст для проверки</string>
+    <string name="corrections_applied">Исправления применены</string>
+    <string name="clear_text_confirmation">Вы уверены, что хотите очистить весь текст?</string>
+    <string name="clear">Очистить</string>
+    <string name="cancel">Отмена</string>
+    <string name="apply">Применить</string>
+    <string name="compare">Сравнить</string>
+    <string name="comparison">Сравнение текстов</string>
+    <string name="original_text">Оригинальный текст:</string>
+    <string name="corrected_text">Исправленный текст:</string>
+    <string name="check_info_title">Информация о проверках:</string>
+    <string name="check_info_basic">• Базовая: LanguageTool - орфография, грамматика, пунктуация</string>
+    <string name="check_info_premium">• Премиум: DeepSeek AI - контекст, стиль, логика, пунктуация</string>
+</resources>

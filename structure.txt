@@ -1,0 +1,148 @@
+D:\VoiceDictation\
+├── .gradle/
+├── .idea/
+├── app/
+│   ├── build/
+│   ├── libs/
+│   └── src/
+│       ├── androidTest/
+│       ├── test/
+│       └── main/
+│           ├── java/com/voicedictation/
+│           │   ├── MainActivity.kt                  # Основная активность
+│           │   ├── VoiceDictationApp.kt            # Application класс
+│           │   ├── data/                           # Слой данных
+│           │   │   ├── repository/
+│           │   │   │   ├── VoiceRepository.kt      # Репозиторий распознавания
+│           │   │   │   └── TextRepository.kt       # Репозиторий текста
+│           │   │   ├── local/
+│           │   │   │   ├── database/
+│           │   │   │   │   ├── AppDatabase.kt      # База данных Room
+│           │   │   │   │   └── entities/
+│           │   │   │   │       └── DictationItem.kt # Сущность записи
+│           │   │   │   └── prefs/
+│           │   │   │       └── AppPreferences.kt   # Настройки SharedPreferences
+│           │   │   └── model/
+│           │   │       ├── VoiceResult.kt          # Модель результата распознавания
+│           │   │       ├── DictationState.kt       # Состояние диктовки
+│           │   │       └── RecognitionError.kt     # Модель ошибки
+│           │   ├── domain/                         # Слой бизнес-логики
+│           │   │   ├── usecase/
+│           │   │   │   ├── RecognizeSpeechUseCase.kt
+│           │   │   │   ├── SaveTextUseCase.kt
+│           │   │   │   ├── CopyToClipboardUseCase.kt
+│           │   │   │   └── ShareTextUseCase.kt
+│           │   │   └── service/
+│           │   │       └── VoiceRecognitionService.kt
+│           │   ├── presentation/                   # Слой представления
+│           │   │   ├── ui/
+│           │   │   │   ├── main/                   # Главный экран
+│           │   │   │   │   ├── MainViewModel.kt
+│           │   │   │   │   ├── MainState.kt
+│           │   │   │   │   └── MainEvent.kt
+│           │   │   │   ├── history/                # История (будущая функция)
+│           │   │   │   │   ├── HistoryViewModel.kt
+│           │   │   │   │   └── HistoryAdapter.kt
+│           │   │   │   └── settings/               # Настройки (будущая функция)
+│           │   │   │       └── SettingsViewModel.kt
+│           │   │   ├── components/                 # Кастомные компоненты UI
+│           │   │   │   ├── WaveVisualizerView.kt   # Визуализатор волны
+│           │   │   │   ├── VoiceButton.kt          # Анимированная кнопка микрофона
+│           │   │   │   └── ResultCardView.kt       # Карточка результата
+│           │   │   └── theme/                      # Тема и стили
+│           │   │       ├── Theme.kt
+│           │   │       ├── Color.kt                # Jetpack Compose Colors
+│           │   │       ├── Type.kt                 # Jetpack Compose Typography
+│           │   │       └── Shape.kt                # Jetpack Compose Shapes
+│           │   ├── di/                             # Dependency Injection
+│           │   │   ├── AppModule.kt
+│           │   │   └── ViewModelModule.kt
+│           │   └── utils/                          # Вспомогательные классы
+│           │       ├── PermissionHelper.kt
+│           │       ├── AnimationHelper.kt
+│           │       ├── TextFormatter.kt
+│           │       ├── FileHelper.kt
+│           │       └── Extensions.kt               # Extension функции
+│           ├── kotlin/
+│           └── res/
+│               ├── anim/                           # XML анимации
+│               │   ├── wave_pulse.xml
+│               │   ├── button_scale.xml
+│               │   └── fade_in_out.xml
+│               ├── drawable/
+│               │   ├── ic_launcher_background.xml
+│               │   ├── ic_launcher_foreground.xml
+│               │   ├── ic_mic.xml
+│               │   ├── ic_content_copy.xml
+│               │   ├── ic_share.xml
+│               │   ├── ic_clear.xml
+│               │   ├── ic_history.xml
+│               │   ├── ic_settings.xml
+│               │   ├── button_mic.xml
+│               │   ├── button_action.xml
+│               │   ├── card_background.xml
+│               │   ├── wave_background.xml
+│               │   ├── gradient_primary.xml
+│               │   └── ripple_circle.xml
+│               ├── drawable-night/                 # Drawable для темной темы
+│               │   ├── card_background_night.xml
+│               │   └── button_mic_night.xml
+│               ├── drawable-v24/
+│               ├── font/                           # Кастомные шрифты
+│               │   ├── roboto_regular.ttf
+│               │   ├── roboto_medium.ttf
+│               │   └── roboto_bold.ttf
+│               ├── layout/                         # XML layouts (View-based)
+│               │   ├── activity_main.xml
+│               │   ├── fragment_history.xml        # Для будущей функции
+│               │   ├── fragment_settings.xml       # Для будущей функции
+│               │   ├── item_history.xml
+│               │   └── dialog_permission.xml
+│               ├── layout-v31/                     # Layout для Android 12+
+│               ├── mipmap-anydpi-v26/
+│               │   ├── ic_launcher.xml
+│               │   └── ic_launcher_round.xml
+│               ├── mipmap-hdpi/
+│               ├── mipmap-mdpi/
+│               ├── mipmap-xhdpi/
+│               ├── mipmap-xxhdpi/
+│               ├── mipmap-xxxhdpi/
+│               ├── navigation/                     # Navigation graph
+│               │   └── nav_graph.xml
+│               ├── raw/                            # Lottie анимации
+│               │   ├── voice_wave.json
+│               │   ├── success.json
+│               │   ├── error.json
+│               │   └── loading.json
+│               ├── values/
+│               │   ├── colors.xml                  # Цвета для View system
+│               │   ├── dimens.xml
+│               │   ├── strings.xml
+│               │   ├── themes.xml
+│               │   └── styles.xml
+│               ├── values-night/                   # Темная тема
+│               │   ├── colors.xml
+│               │   └── themes.xml
+│               ├── values-ru/                      # Локализация
+│               │   └── strings.xml
+│               ├── values-v21/
+│               │   └── themes.xml
+│               ├── values-v31/                     # Material 3 для Android 12+
+│               │   └── themes.xml
+│               └── xml/
+│                   ├── backup_rules.xml
+│                   ├── data_extraction_rules.xml
+│                   ├── network_security_config.xml
+│                   ├── shortcuts.xml               # App shortcuts
+│                   └── file_paths.xml
+├── build.gradle
+├── gradle/
+│   └── wrapper/
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+├── local.properties
+├── README.md
+├── CHANGELOG.md
+├── LICENSE
+└── .gitignore

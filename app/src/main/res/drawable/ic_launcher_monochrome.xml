@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Монохромная версия иконки -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,30c-9.9,0 -18,8.1 -18,18s8.1,18 18,18 18,-8.1 18,-18S63.9,30 54,30z
+                         M54,48c0,0 -12,0 -12,12 0,9.9 8.1,18 18,18s18,-8.1 18,-18c0,-12 -12,-12 -12,-12
+                         M54,48c-6.6,0 -12,5.4 -12,12s5.4,12 12,12 12,-5.4 12,-12S60.6,48 54,48z" />
+
+</vector>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Стиль текстового поля для темной темы -->
+    <style name="ResultTextViewDark">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:gravity">top</item>
+    </style>
+
+    <!-- Стиль контейнера результата - ИСПРАВЛЕНО (убрал parent) -->
+    <style name="ResultContainerDark">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <!-- Добавьте стиль CardViewDark если он нужен -->
+    <style name="CardViewDark">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/surface</item>
+    </style>
+</resources>

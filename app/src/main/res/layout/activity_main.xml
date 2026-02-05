@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- Заголовок приложения -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Голосовая диктовка"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <!-- Основная область с текстом -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/text_field_background_light"
+        android:padding="8dp">
+
+        <!-- EditText для текста -->
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="Текст появится здесь..."
+            android:gravity="top|start"
+            android:minHeight="200dp"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="1000"
+            android:scrollbars="vertical"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textColorHint="@color/grey_600"/>
+
+        <!-- Индикатор анимации голоса -->
+        <ImageView
+            android:id="@+id/voiceAnimationView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_mic_24"
+            android:visibility="gone"
+            android:contentDescription="Анимация записи"
+            android:tint="@color/red_500"/>
+
+    </RelativeLayout>
+
+    <!-- Счетчик символов -->
+    <TextView
+        android:id="@+id/charCountText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Символов: 0 | Слов: 0"
+        android:textSize="12sp"
+        android:gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="?android:attr/textColorSecondary"/>
+
+    <!-- Панель кнопок действий -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <!-- Кнопка микрофона -->
+        <ImageButton
+            android:id="@+id/micButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_mic_white"
+            android:background="@drawable/round_button_primary"
+            android:contentDescription="Запись голоса"
+            android:scaleType="center"
+            android:elevation="4dp"
+            app:tint="@color/white"/>
+
+        <!-- Кнопка очистки -->
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_clear"
+            android:background="@drawable/round_button_secondary"
+            android:contentDescription="Очистить текст"
+            android:visibility="gone"
+            android:scaleType="center"
+            android:elevation="2dp"
+            app:tint="?android:attr/textColorPrimary"/>
+
+        <!-- Кнопка копирования -->
+        <ImageButton
+            android:id="@+id/copyButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_content_copy"
+            android:background="@drawable/round_button_secondary"
+            android:contentDescription="Копировать текст"
+            android:visibility="gone"
+            android:scaleType="center"
+            android:elevation="2dp"
+            app:tint="?android:attr/textColorPrimary"/>
+
+        <!-- Кнопка поделиться -->
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_share"
+            android:background="@drawable/round_button_secondary"
+            android:contentDescription="Поделиться текстом"
+            android:visibility="gone"
+            android:scaleType="center"
+            android:elevation="2dp"
+            app:tint="?android:attr/textColorPrimary"/>
+
+    </LinearLayout>
+
+    <!-- Панель проверки текста -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Проверка текста:"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        android:gravity="center">
+
+        <!-- Кнопка базовой проверки -->
+        <Button
+            android:id="@+id/btn_check_basic"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Базовая проверка"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:enabled="false"
+            style="@style/Widget.AppCompat.Button"
+            android:elevation="2dp"
+            android:stateListAnimator="@null"/>
+
+        <!-- Кнопка премиум проверки -->
+        <Button
+            android:id="@+id/btn_check_premium"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Премиум проверка"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@color/white"
+            android:enabled="false"
+            style="@style/Widget.AppCompat.Button"
+            android:elevation="2dp"
+            android:stateListAnimator="@null"/>
+
+    </LinearLayout>
+
+    <!-- Прогресс-бары для проверок -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp">
+
+        <!-- Прогресс-бар для базовой проверки -->
+        <ProgressBar
+            android:id="@+id/progressBarBasic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:indeterminateTint="@color/purple_500"/>
+
+        <!-- Прогресс-бар для премиум проверки -->
+        <ProgressBar
+            android:id="@+id/progressBarPremium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:indeterminateTint="@color/teal_700"/>
+
+    </LinearLayout>
+
+    <!-- Информация о проверках -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:background="?selectableItemBackground"
+        android:padding="12dp"
+        android:elevation="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Информация о проверках:"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Базовая: LanguageTool - орфография, грамматика, пунктуация"
+            android:textSize="11sp"
+            android:layout_marginBottom="2dp"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Премиум: DeepSeek AI - контекст, стиль, логика, пунктуация"
+            android:textSize="11sp"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+    </LinearLayout>
+
+</LinearLayout>

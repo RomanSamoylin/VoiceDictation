@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:tint="#FFFFFF">
+
+    <!-- Корпус диктофона -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M54,30c-9.9,0 -18,8.1 -18,18s8.1,18 18,18 18,-8.1 18,-18S63.9,30 54,30z" />
+
+    <!-- Центральный круг микрофона -->
+    <path
+        android:fillColor="@color/red_500"
+        android:pathData="M54,48a12,12 0 1,0 0,0.1z" />
+
+    <!-- Волны звука -->
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="2"
+        android:pathData="M54,66c-9.9,0 -18,8.1 -18,18" />
+
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="2"
+        android:pathData="M36,48c-9.9,0 -18,8.1 -18,18" />
+
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="2"
+        android:pathData="M72,48c9.9,0 18,8.1 18,18" />
+
+    <!-- Ножка микрофона (подставка) - исправляем rect -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M50,60h8v12h-8z" />
+
+</vector>

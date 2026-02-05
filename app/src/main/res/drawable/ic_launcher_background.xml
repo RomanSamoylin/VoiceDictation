@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Красная объемная пуговица с градиентом -->
+    <path
+        android:fillColor="@color/red_500"
+        android:pathData="M54,0C24.2,0 0,24.2 0,54s24.2,54 54,54 54,-24.2 54,-54S83.8,0 54,0z" />
+
+    <!-- Верхняя часть для объема (светлее) -->
+    <path
+        android:fillColor="@color/red_300"
+        android:pathData="M54,8C28.7,8 8,28.7 8,54s20.7,46 46,46 46,-20.7 46,-46S79.3,8 54,8z" />
+
+    <!-- Основной круг пуговицы (темнее) -->
+    <path
+        android:fillColor="@color/red_700"
+        android:pathData="M54,12C30.2,12 11,30.2 11,54s19.2,42 43,42 43,-19.2 43,-42S77.8,12 54,12z" />
+
+    <!-- Блик сверху (исправляем ellipse) -->
+    <path
+        android:fillColor="#80FFFFFF"
+        android:pathData="M36,30a8,4 0 1,0 16,0a8,4 0 1,0 -16,0" />
+
+</vector>
