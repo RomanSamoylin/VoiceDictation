@@ -10,16 +10,6 @@
     tools:context=".MainActivity">
 
     <!-- Заголовок приложения -->
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Голосовая диктовка"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"
-        android:textColor="?android:attr/textColorPrimary"/>
 
     <!-- Основная область с текстом -->
     <RelativeLayout
@@ -238,7 +228,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Базовая: LanguageTool - орфография, грамматика, пунктуация"
+            android:text="• Базовая: орфография и пунктуация"
             android:textSize="11sp"
             android:layout_marginBottom="2dp"
             android:textColor="?android:attr/textColorSecondary"/>
@@ -246,7 +236,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Премиум: DeepSeek AI - контекст, стиль, логика, пунктуация"
+            android:text="• Премиум: + контекст и стиль"
             android:textSize="11sp"
             android:textColor="?android:attr/textColorSecondary"/>
 
