@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class DeepSeekChecker {
     private static final String TAG = "DeepSeekChecker";
     private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
-    private static final String API_KEY = "sk-876fad4900aa47e3810b9cbc42857b41";
+    private static final String API_KEY = "sk-";
 
     // Настройки лимита
     private static final int DAILY_TOKEN_LIMIT = 5000; // 5000 токенов в день
