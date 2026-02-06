@@ -548,46 +548,84 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        lastOriginalText = text;
+        // Проверяем максимальную длину для одного запроса
+        if (text.length() > 10000) {
+            showToast("Для проверки максимум 10000 символов за раз");
+            return;
+        }
+
+        // Отключаем кнопку на время проверки
         btnCheckBasic.setEnabled(false);
-        showToast("Проверяем базовой проверкой…");
+        showToast("Проверяем...");
 
-        // Создаем callback для LanguageToolService
-        LanguageToolService.SpellCheckCallback callback = new LanguageToolService.SpellCheckCallback() {
+        // Используем LanguageToolChecker
+        LanguageToolChecker.checkText(this, text, new LanguageToolChecker.CheckCallback() {
             @Override
-            public void onProgress(String message) {
-                runOnUiThread(() -> {
-                    Log.d(TAG, "Basic check progress: " + message);
-                });
-            }
-
-            @Override
-            public void onSuccess(String correctedText, int fixesCount) {
+            public void onSuccess(String correctedText, int charsUsed) {
                 runOnUiThread(() -> {
                     btnCheckBasic.setEnabled(true);
 
                     if (!text.equals(correctedText)) {
-                        showCorrectionDialog("Результат базовой проверки",
+                        // Считаем количество исправлений (упрощенно)
+                        int fixesCount = countDifferences(text, correctedText);
+
+                        showCorrectionDialog("Результат базовой проверки (использовано: " + charsUsed + " символов)",
                                 text, correctedText, fixesCount);
                     } else {
-                        showToast("Текст проверен, ошибок не найдено");
+                        showToast("Текст проверен, ошибок не найдено (использовано: " + charsUsed + " символов)");
                     }
                 });
             }
 
             @Override
-            public void onError(String errorMessage) {
+            public void onError(String error) {
                 runOnUiThread(() -> {
                     btnCheckBasic.setEnabled(true);
-                    showToast("Ошибка базовой проверки: " + errorMessage);
-                    Log.e(TAG, "LanguageTool error: " + errorMessage);
+                    showToast("Ошибка проверки: " + error);
+                    Log.e(TAG, "LanguageTool error: " + error);
                 });
             }
-        };
 
-        languageToolService.checkText(text, callback);
+            @Override
+            public void onLimitExceeded(int remainingChars, int remainingRequests) {
+                runOnUiThread(() -> {
+                    btnCheckBasic.setEnabled(true);
+
+                    String message;
+                    if (remainingRequests <= 0) {
+                        message = "Достигнут лимит запросов!\n" +
+                                "Осталось символов: " + remainingChars + "\n" +
+                                "Осталось запросов: " + remainingRequests + "\n" +
+                                "Лимит обновится завтра.";
+                    } else if (remainingChars <= 0) {
+                        message = "Достигнут лимит символов!\n" +
+                                "Осталось запросов: " + remainingRequests + "\n" +
+                                "Лимит обновится завтра.";
+                    } else {
+                        message = "Недостаточно доступных символов!\n" +
+                                "Осталось символов: " + remainingChars + "\n" +
+                                "Осталось запросов: " + remainingRequests + "\n" +
+                                "Лимит обновится завтра.";
+                    }
+
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Лимит LanguageTool")
+                            .setMessage(message)
+                            .setPositiveButton("OK", null)
+                            .show();
+                });
+            }
+        });
     }
 
+    // Вспомогательный метод для подсчета различий
+    private int countDifferences(String original, String corrected) {
+        if (original.equals(corrected)) return 0;
+
+        // Простой подсчет - считаем что каждое изменение это одно исправление
+        // Более сложная логика может анализировать количество реальных замен
+        return 1; // Или можно вернуть другое значение в зависимости от логики
+    }
     private void performPremiumCheck() {
         String text = editText.getText().toString().trim();
 
@@ -596,18 +634,71 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (text.length() > 4000) {
-            showToast("Текст слишком длинный для премиум-проверки (макс. 4000 символов)");
+        // Проверяем лимит символов
+        if (text.length() > 2000) {
+            showToast("Для ИИ проверки максимум 2000 символов");
             return;
         }
 
-        // Показываем сообщение о необходимости настройки API
-        showToast("Для премиум проверки нужен API ключ DeepSeek\n" +
-                "Функция в разработке...");
+        // Отключаем кнопку на время проверки
+        btnCheckPremium.setEnabled(false);
+        showToast("Проверяем...");
 
-        // TODO: Реализовать DeepSeek проверку
+        // Используем DeepSeekChecker
+        DeepSeekChecker.checkText(this, text, new DeepSeekChecker.CheckCallback() {
+            @Override
+            public void onSuccess(String correctedText, int tokensUsed) {
+                runOnUiThread(() -> {
+                    btnCheckPremium.setEnabled(true);
+
+                    // Показываем диалог с исправленным текстом
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Проверка (использовано токенов: " + tokensUsed + ")");
+
+                    // Создаем ScrollView для текста
+                    android.widget.ScrollView scrollView = new android.widget.ScrollView(MainActivity.this);
+                    TextView textView = new TextView(MainActivity.this);
+                    textView.setText("Исправленный текст:\n\n" + correctedText);
+                    textView.setPadding(20, 20, 20, 20);
+                    scrollView.addView(textView);
+
+                    builder.setView(scrollView)
+                            .setPositiveButton("Применить", (dialog, which) -> {
+                                editText.setText(correctedText);
+                                showToast("Текст исправлен");
+                            })
+                            .setNegativeButton("Отмена", null)
+                            .show();
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(() -> {
+                    btnCheckPremium.setEnabled(true);
+                    showToast("Ошибка: " + error);
+                    Log.e(TAG, "Error: " + error);
+                });
+            }
+
+            @Override
+            public void onLimitExceeded(int remainingTokens) {
+                runOnUiThread(() -> {
+                    btnCheckPremium.setEnabled(true);
+                    showToast("Лимит токенов исчерпан!\nОсталось: " + remainingTokens + " токенов");
+
+                    // Можно показать диалог с информацией
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Лимит превышен")
+                            .setMessage("Дневной лимит токенов исчерпан.\n" +
+                                    "Осталось доступно: " + remainingTokens + " токенов.\n" +
+                                    "Лимит обновится завтра.")
+                            .setPositiveButton("OK", null)
+                            .show();
+                });
+            }
+        });
     }
-
     private void showCorrectionDialog(String title, String originalText,
                                       String correctedText, int fixesCount) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
