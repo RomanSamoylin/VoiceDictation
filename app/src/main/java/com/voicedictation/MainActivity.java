@@ -13,7 +13,6 @@ import android.speech.SpeechRecognizer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,13 +22,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.voicedictation.api.LanguageToolService;
@@ -42,27 +39,16 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1001;
     private static final String TAG = "VoiceDictation";
 
-    // UI элементы основного режима
+    // UI элементы
     private EditText editText;
     private ImageButton micButton;
     private ImageButton clearButton;
     private ImageButton copyButton;
     private ImageButton shareButton;
-    private ImageButton btnExpand;
     private Button btnCheckBasic;
     private Button btnCheckPremium;
-    private ProgressBar progressBarBasic;
-    private ProgressBar progressBarPremium;
     private TextView charCountText;
     private ImageView voiceAnimationView;
-
-    // UI элементы полноэкранного редактора
-    private ConstraintLayout fullscreenEditor;
-    private EditText editTextFullscreen;
-    private ImageButton btnCloseEditor, btnEditorClear;
-    private Button btnEditorSelectAll, btnEditorCut, btnEditorCopy, btnEditorPasteText;
-    private TextView editorCharCountText;
-    private LinearLayout mainLayout;
 
     // Распознавание речи
     private SpeechRecognizer speechRecognizer;
@@ -92,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         // Настройка слушателей текста
         setupTextListeners();
 
-        // Настройка редактора
-        setupEditorModes();
+        // Настройка поля ввода
+        setupEditText();
 
         // Проверка и запрос разрешений
         checkPermissions();
@@ -106,32 +92,18 @@ public class MainActivity extends AppCompatActivity {
         clearButton = findViewById(R.id.clearButton);
         copyButton = findViewById(R.id.copyButton);
         shareButton = findViewById(R.id.shareButton);
-        btnExpand = findViewById(R.id.btnExpand);
         btnCheckBasic = findViewById(R.id.btn_check_basic);
         btnCheckPremium = findViewById(R.id.btn_check_premium);
-        progressBarBasic = findViewById(R.id.progressBarBasic);
-        progressBarPremium = findViewById(R.id.progressBarPremium);
         charCountText = findViewById(R.id.charCountText);
         voiceAnimationView = findViewById(R.id.voiceAnimationView);
-        mainLayout = findViewById(R.id.mainLayout);
 
-        // Элементы полноэкранного редактора
-        fullscreenEditor = findViewById(R.id.fullscreenEditor);
-        editTextFullscreen = findViewById(R.id.editTextFullscreen);
-        btnCloseEditor = findViewById(R.id.btnCloseEditor);
-        btnEditorClear = findViewById(R.id.btnEditorClear);
-        btnEditorSelectAll = findViewById(R.id.btnEditorSelectAll);
-        btnEditorCut = findViewById(R.id.btnEditorCut);
-        btnEditorCopy = findViewById(R.id.btnEditorCopy);
-        btnEditorPasteText = findViewById(R.id.btnEditorPasteText);
-        editorCharCountText = findViewById(R.id.editorCharCountText);
-
-        // Скрываем прогресс-бары и анимацию по умолчанию
-        progressBarBasic.setVisibility(View.GONE);
-        progressBarPremium.setVisibility(View.GONE);
+        // Скрываем анимацию по умолчанию
         voiceAnimationView.setVisibility(View.GONE);
-        btnExpand.setVisibility(View.GONE);
-        fullscreenEditor.setVisibility(View.GONE);
+
+        // Скрываем кнопки действий по умолчанию
+        clearButton.setVisibility(View.GONE);
+        copyButton.setVisibility(View.GONE);
+        shareButton.setVisibility(View.GONE);
 
         Log.d(TAG, "initViews: UI элементы инициализированы");
     }
@@ -142,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupTextListeners() {
-        // Слушатель для подсчета символов в основном поле
+        // Слушатель для подсчета символов
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -159,143 +131,22 @@ public class MainActivity extends AppCompatActivity {
                 clearButton.setVisibility(hasText ? View.VISIBLE : View.GONE);
                 copyButton.setVisibility(hasText ? View.VISIBLE : View.GONE);
                 shareButton.setVisibility(hasText ? View.VISIBLE : View.GONE);
-                btnExpand.setVisibility(hasText ? View.VISIBLE : View.GONE);
                 btnCheckBasic.setEnabled(hasText);
                 btnCheckPremium.setEnabled(hasText);
-            }
-        });
-
-        // Слушатель для подсчета символов в полноэкранном редакторе
-        editTextFullscreen.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateEditorCharCount(s.toString());
             }
         });
 
         Log.d(TAG, "setupTextListeners: Слушатели текста настроены");
     }
 
-    private void setupEditorModes() {
-        // Обработчик клика по основному полю
+    private void setupEditText() {
+        // Обработчик клика по полю ввода
         editText.setOnClickListener(v -> {
             editText.requestFocus();
             showKeyboard(editText);
         });
 
-        // Долгое нажатие на поле - переход в полноэкранный режим
-        editText.setOnLongClickListener(v -> {
-            openFullscreenEditor();
-            return true;
-        });
-
-        // Кнопка расширения
-        btnExpand.setOnClickListener(v -> openFullscreenEditor());
-
-        // Кнопка закрытия редактора
-        btnCloseEditor.setOnClickListener(v -> closeFullscreenEditor());
-
-        // Кнопки редактора
-        setupEditorButtons();
-
-        Log.d(TAG, "setupEditorModes: Режимы редактора настроены");
-    }
-
-    private void setupEditorButtons() {
-        btnEditorClear.setOnClickListener(v -> {
-            editTextFullscreen.setText("");
-            showToast("Текст очищен");
-        });
-
-        btnEditorPasteText.setOnClickListener(v -> pasteFromClipboard());
-
-        btnEditorSelectAll.setOnClickListener(v -> {
-            editTextFullscreen.selectAll();
-            showToast("Весь текст выделен");
-        });
-
-        btnEditorCut.setOnClickListener(v -> {
-            int start = editTextFullscreen.getSelectionStart();
-            int end = editTextFullscreen.getSelectionEnd();
-            if (start != end) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Текст",
-                        editTextFullscreen.getText().subSequence(start, end));
-                clipboard.setPrimaryClip(clip);
-
-                editTextFullscreen.getText().delete(start, end);
-                showToast("Текст вырезан");
-            }
-        });
-
-        btnEditorCopy.setOnClickListener(v -> {
-            int start = editTextFullscreen.getSelectionStart();
-            int end = editTextFullscreen.getSelectionEnd();
-            if (start != end) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Текст",
-                        editTextFullscreen.getText().subSequence(start, end));
-                clipboard.setPrimaryClip(clip);
-                showToast("Текст скопирован");
-            }
-        });
-
-        // Обработка кнопки "Назад" в редакторе
-        editTextFullscreen.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                closeFullscreenEditor();
-                return true;
-            }
-            return false;
-        });
-    }
-
-    private void openFullscreenEditor() {
-        Log.d(TAG, "openFullscreenEditor: Открытие полноэкранного редактора");
-
-        // Сохраняем текущий текст в полноэкранное поле
-        String currentText = editText.getText().toString();
-        editTextFullscreen.setText(currentText);
-
-        // Переключаем видимость
-        mainLayout.setVisibility(View.GONE);
-        fullscreenEditor.setVisibility(View.VISIBLE);
-
-        // Устанавливаем фокус и показываем клавиатуру
-        editTextFullscreen.requestFocus();
-        editTextFullscreen.setSelection(editTextFullscreen.getText().length());
-        showKeyboard(editTextFullscreen);
-
-        // Обновляем счетчик
-        updateEditorCharCount(currentText);
-
-        showToast("Редактор открыт");
-    }
-
-    private void closeFullscreenEditor() {
-        Log.d(TAG, "closeFullscreenEditor: Закрытие полноэкранного редактора");
-
-        // Сохраняем текст обратно в основное поле
-        String editedText = editTextFullscreen.getText().toString();
-        editText.setText(editedText);
-
-        // Переключаем видимость
-        fullscreenEditor.setVisibility(View.GONE);
-        mainLayout.setVisibility(View.VISIBLE);
-
-        // Скрываем клавиатуру
-        hideKeyboard();
-
-        // Обновляем счетчик
-        updateCharCount(editedText);
-
-        showToast("Изменения сохранены");
+        Log.d(TAG, "setupEditText: Поле ввода настроено");
     }
 
     private void updateCharCount(String text) {
@@ -304,29 +155,16 @@ public class MainActivity extends AppCompatActivity {
         charCountText.setText(String.format("Символов: %d | Слов: %d", charCount, wordCount));
     }
 
-    private void updateEditorCharCount(String text) {
-        int charCount = text.length();
-        int wordCount = text.trim().isEmpty() ? 0 : text.trim().split("\\s+").length;
-        editorCharCountText.setText(String.format("Символов: %d | Слов: %d", charCount, wordCount));
-    }
-
     private void pasteFromClipboard() {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboard.hasPrimaryClip()) {
             ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
             String pasteData = item.getText().toString();
 
-            if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-                int start = editTextFullscreen.getSelectionStart();
-                int end = editTextFullscreen.getSelectionEnd();
-                Editable editable = editTextFullscreen.getText();
-                editable.replace(Math.min(start, end), Math.max(start, end), pasteData);
-            } else {
-                int start = editText.getSelectionStart();
-                int end = editText.getSelectionEnd();
-                Editable editable = editText.getText();
-                editable.replace(Math.min(start, end), Math.max(start, end), pasteData);
-            }
+            int start = editText.getSelectionStart();
+            int end = editText.getSelectionEnd();
+            Editable editable = editText.getText();
+            editable.replace(Math.min(start, end), Math.max(start, end), pasteData);
 
             showToast("Текст вставлен");
         } else {
@@ -506,26 +344,14 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "RecognitionListener: Распознанный текст: " + spokenText);
 
                         runOnUiThread(() -> {
-                            // Добавляем текст в текущее активное поле
-                            if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-                                // В полноэкранном редакторе
-                                String currentText = editTextFullscreen.getText().toString();
-                                if (!currentText.isEmpty() && !currentText.endsWith(" ") &&
-                                        !currentText.endsWith("\n")) {
-                                    currentText += " ";
-                                }
-                                editTextFullscreen.setText(currentText + spokenText);
-                                editTextFullscreen.setSelection(editTextFullscreen.getText().length());
-                            } else {
-                                // В основном режиме
-                                String currentText = editText.getText().toString();
-                                if (!currentText.isEmpty() && !currentText.endsWith(" ") &&
-                                        !currentText.endsWith("\n")) {
-                                    currentText += " ";
-                                }
-                                editText.setText(currentText + spokenText);
-                                editText.setSelection(editText.getText().length());
+                            // Добавляем текст в поле ввода
+                            String currentText = editText.getText().toString();
+                            if (!currentText.isEmpty() && !currentText.endsWith(" ") &&
+                                    !currentText.endsWith("\n")) {
+                                currentText += " ";
                             }
+                            editText.setText(currentText + spokenText);
+                            editText.setSelection(editText.getText().length());
 
                             showToast("Текст добавлен");
                         });
@@ -682,21 +508,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearText() {
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            editTextFullscreen.setText("");
-        } else {
-            editText.setText("");
-        }
+        editText.setText("");
         showToast("Текст очищен");
     }
 
     private void copyText() {
-        String text;
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            text = editTextFullscreen.getText().toString();
-        } else {
-            text = editText.getText().toString();
-        }
+        String text = editText.getText().toString();
 
         if (!text.isEmpty()) {
             ClipboardManager clipboard =
@@ -710,12 +527,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void shareText() {
-        String text;
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            text = editTextFullscreen.getText().toString();
-        } else {
-            text = editText.getText().toString();
-        }
+        String text = editText.getText().toString();
 
         if (!text.isEmpty()) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -729,12 +541,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performBasicCheck() {
-        String text;
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            text = editTextFullscreen.getText().toString().trim();
-        } else {
-            text = editText.getText().toString().trim();
-        }
+        String text = editText.getText().toString().trim();
 
         if (text.isEmpty()) {
             showToast("Введите текст для проверки");
@@ -742,7 +549,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         lastOriginalText = text;
-        progressBarBasic.setVisibility(View.VISIBLE);
         btnCheckBasic.setEnabled(false);
         showToast("Проверяем базовой проверкой…");
 
@@ -758,7 +564,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String correctedText, int fixesCount) {
                 runOnUiThread(() -> {
-                    progressBarBasic.setVisibility(View.GONE);
                     btnCheckBasic.setEnabled(true);
 
                     if (!text.equals(correctedText)) {
@@ -773,7 +578,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(String errorMessage) {
                 runOnUiThread(() -> {
-                    progressBarBasic.setVisibility(View.GONE);
                     btnCheckBasic.setEnabled(true);
                     showToast("Ошибка базовой проверки: " + errorMessage);
                     Log.e(TAG, "LanguageTool error: " + errorMessage);
@@ -785,12 +589,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performPremiumCheck() {
-        String text;
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            text = editTextFullscreen.getText().toString().trim();
-        } else {
-            text = editText.getText().toString().trim();
-        }
+        String text = editText.getText().toString().trim();
 
         if (text.isEmpty()) {
             showToast("Введите текст для проверки");
@@ -824,11 +623,7 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setView(scrollView)
                 .setPositiveButton("Применить", (dialog, which) -> {
-                    if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-                        editTextFullscreen.setText(correctedText);
-                    } else {
-                        editText.setText(correctedText);
-                    }
+                    editText.setText(correctedText);
                     showToast("Исправления применены");
                 })
                 .setNegativeButton("Отмена", null)
@@ -885,15 +680,6 @@ public class MainActivity extends AppCompatActivity {
         if (currentFocus != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (fullscreenEditor.getVisibility() == View.VISIBLE) {
-            closeFullscreenEditor();
-        } else {
-            super.onBackPressed();
         }
     }
 
